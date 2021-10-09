@@ -22,14 +22,14 @@ jobs:
         uses: ./
         with:
           directory: '.tests/test-1'
-          snakefile: '.tests/test-1/Snakefile'
+          #snakefile: '.tests/test-1/Snakefile'
           args: '-np'
 
       - name: Create container file
         uses: ./
         with:
           directory: '.tests/test-1'
-          snakefile: '.tests/test-1/Snakefile'
+          #snakefile: '.tests/test-1/Snakefile'
           task: 'containerize'
       
       - name: Show Dockerfile
@@ -49,14 +49,14 @@ jobs:
         uses: ./
         with:
           directory: '.tests/test-2'
-          snakefile: '.tests/test-2/Snakefile'
+          #snakefile: '.tests/test-2/Snakefile'
           args: '-np'
 
       - name: Create container file
         uses: ./
         with:
           directory: '.tests/test-2'
-          snakefile: '.tests/test-2/Snakefile'
+          #snakefile: '.tests/test-2/Snakefile'
           task: 'containerize'
       
       - name: Show Dockerfile
