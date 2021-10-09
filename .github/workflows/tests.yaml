@@ -17,26 +17,24 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: debug-containerize
-
-      - name: enter test
-        run: |
-          cd .tests/test-1
-          
+         
       - name: Snakemake dry run
         uses: ./
         with:
+          stagein: 'cd .tests/test-1'
           directory: '.'
           args: '-np'
 
       - name: Create container file
         uses: ./
         with:
+          stagein: 'cd .tests/test-1'
           directory: '.'
           task: 'containerize'
       
       - name: Show Dockerfile
         run: |
-          cat Dockerfile
+          cat .tests/test-1/Dockerfile
 
   test-2:
     name: Test Basic Conda Environment
