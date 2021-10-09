@@ -1,0 +1,57 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+defaults:
+  runs-on: ubuntu-latest
+
+jobs:
+  test-1:
+    name: Test Empty Snakefile
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: Snakemake dry run
+        uses: ./
+        with:
+          directory: '.tests/test-1'
+          args: '-np'
+
+      - name: Create container file
+        uses: ./
+        with:
+          directory: '.tests/test-1'
+          task: 'containerize'
+      
+      - name: Show Dockerfile
+        run: |
+          cat Dockerfile
+
+  test-2:
+    name: Test Basic Conda Environment
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: Snakemake dry run
+        uses: ./
+        with:
+          directory: '.tests/test-2'
+          args: '-np'
+
+      - name: Create container file
+        uses: ./
+        with:
+          directory: '.tests/test-2'
+          task: 'containerize'
+      
+      - name: Show Dockerfile
+        run: |
+          cat Dockerfile
