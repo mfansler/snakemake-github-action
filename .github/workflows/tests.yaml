@@ -18,18 +18,20 @@ jobs:
         with:
           ref: debug-containerize
 
+      - name: enter test
+        run: |
+          cd .tests/test-1
+          
       - name: Snakemake dry run
         uses: ./
         with:
-          directory: '.tests/test-1'
-          snakefile: '.tests/test-1/Snakefile'
+          directory: '.'
           args: '-np'
 
       - name: Create container file
         uses: ./
         with:
-          directory: '.tests/test-1'
-          snakefile: '.tests/test-1/Snakefile'
+          directory: '.'
           task: 'containerize'
       
       - name: Show Dockerfile
