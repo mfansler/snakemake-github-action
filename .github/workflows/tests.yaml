@@ -13,7 +13,7 @@ jobs:
     name: Test Empty Snakefile
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v2
         with:
           ref: debug-containerize
@@ -21,16 +21,16 @@ jobs:
       - name: Snakemake dry run
         uses: ./
         with:
-          stagein: 'cd .tests/test-1'
-          directory: '.'
+          stagein: cd .tests/test-1
+          directory: .
           args: '-np'
 
       - name: Create container file
         uses: ./
         with:
-          stagein: 'cd .tests/test-1'
-          directory: '.'
-          task: 'containerize'
+          stagein: cd .tests/test-1
+          directory: .
+          task: containerize
       
       - name: Show Dockerfile
         run: |
@@ -40,7 +40,7 @@ jobs:
     name: Test Basic Conda Environment
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v2
         with:
           ref: debug-containerize
@@ -48,17 +48,17 @@ jobs:
       - name: Snakemake dry run
         uses: ./
         with:
-          directory: '.tests/test-2'
-          snakefile: '.tests/test-2/Snakefile'
+          stagein: cd .tests/test-2
+          directory: .
           args: '-np'
 
       - name: Create container file
         uses: ./
         with:
-          directory: '.tests/test-2'
-          snakefile: '.tests/test-2/Snakefile'
-          task: 'containerize'
+          stagein: cd .tests/test-2
+          directory: .
+          task: containerize
       
       - name: Show Dockerfile
         run: |
-          cat Dockerfile
+          cat .tests/test-2/Dockerfile
